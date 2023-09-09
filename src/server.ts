@@ -3,7 +3,7 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 
 import { typeDefs } from "./graphql/typeDefs.generated";
 import { resolvers } from "./graphql/resolvers.generated";
-import { Prisma, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 const server = new ApolloServer({
   typeDefs,
@@ -15,6 +15,7 @@ const prisma = new PrismaClient({
 });
 
 const { url } = await startStandaloneServer(server, {
+  listen: { port: 4000 },
   context: async () => {
     return {
       prisma,

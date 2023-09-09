@@ -1,10 +1,13 @@
 import type { ProductResolvers } from "./../../types.generated";
 export const Product: ProductResolvers = {
-	reviews(parent, _args, ctx) {
-		return ctx.prisma.review.findMany({
+	async reviews(parent, _args, ctx) {
+		const reviews = await ctx.prisma.product.findUnique({
 			where: {
-				productId: parent.id,
+				id: parent.id,
 			},
-		});
+
+		}).reviews();
+
+		return reviews ?? [];
 	},
 };

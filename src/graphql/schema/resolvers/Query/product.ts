@@ -1,4 +1,3 @@
-import { prisma } from "../../../../db.js";
 import type { QueryResolvers } from "./../../../types.generated";
 
 export const product: NonNullable<QueryResolvers["product"]> = async (
@@ -11,8 +10,10 @@ export const product: NonNullable<QueryResolvers["product"]> = async (
 			id: arg.id,
 		},
 	});
+
 	if (!product) {
 		return null;
 	}
+
 	return { ...product, reviews: [] };
 };

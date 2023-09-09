@@ -3,8 +3,8 @@ import { faker } from "@faker-js/faker";
 
 const prisma = new PrismaClient();
 
-const productsCount = 15;
-const reviewsCount = 10;
+const productsCount = 5;
+const reviewsCount = 2;
 
 for (let i = 0; i < productsCount; i++) {
 	const name = faker.commerce.productName();

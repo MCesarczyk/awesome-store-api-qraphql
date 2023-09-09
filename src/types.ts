@@ -7,13 +7,16 @@ type OptionalKeys<T> = {
 }[keyof T];
 
 type MakeNestedRelationsOptional<T extends object> = {
-  [K in keyof Pick<T, OptionalKeys<T>>]?: MakeNestedRelationsOptional<T[K]>;
+  [K in keyof Pick<T, OptionalKeys<T>>]?: MakeNestedRelationsOptional<
+    T[K]
+  >;
 } & {
     [K in keyof Omit<T, OptionalKeys<T>>]: T[K];
   };
 
-// export type Mapper<T> = T extends object ? MakeNestedRelationsOptional<T> : T;
-
+// export type Mapper<T> = T extends object
+// 	? MakeNestedRelationsOptional<T>
+// 	: T;
 export type Mapper<T> = T;
 
 export type Context = {

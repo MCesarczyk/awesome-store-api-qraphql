@@ -16,21 +16,23 @@ model Product {
   slug        String
   description String
   price       Int
+  image       String @default("https://source.unsplash.com/random/400x300")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Review    Review[]
+
+  reviews Review[]
 }
 
 model Review {
   id          String @id @default(cuid())
-  productId   String
   title       String
   description String
   rating      Int
 
-  product Product @relation(fields: [productId], references: [id])
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
 }
