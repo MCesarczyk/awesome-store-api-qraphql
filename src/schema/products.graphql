@@ -1,6 +1,6 @@
 extend type Query {
 	product(id: ID!): Product
-	products(first: Int!, skip: Int): [Product!]!
+	products(first: Int, skip: Int): [Product]
 }
 
 type Image {
@@ -16,6 +16,7 @@ type Product {
 	images: [Image!]!
 
 	reviews: [Review!]!
+  orderItems: [OrderItem!]!
 
 	createdAt: DateTime!
 	updatedAt: DateTime!

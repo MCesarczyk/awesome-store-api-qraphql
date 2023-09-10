@@ -5,19 +5,20 @@ const prisma = new PrismaClient();
 
 const productsCount = 5;
 const reviewsCount = 2;
+const orderItemsCount = 10;
 
 for (let i = 0; i < productsCount; i++) {
-	const name = faker.commerce.productName();
+  const name = faker.commerce.productName();
 
-	const createdProduct = await prisma.product.create({
-		data: {
-			name: name,
-			slug: faker.helpers.slugify(name).toLowerCase(),
-			description: faker.commerce.productDescription(),
-			price: Number(faker.commerce.price()) * 100,
-		},
-	});
-	console.log(`Created product with id: ${createdProduct.id}`);
+  const createdProduct = await prisma.product.create({
+    data: {
+      name: name,
+      slug: faker.helpers.slugify(name).toLowerCase(),
+      description: faker.commerce.productDescription(),
+      price: Number(faker.commerce.price()) * 100,
+    },
+  });
+  console.log(`Created product with id: ${createdProduct.id}`);
 
   for (let j = 0; j < reviewsCount; j++) {
     const createdReview = await prisma.review.create({
@@ -33,5 +34,32 @@ for (let i = 0; i < productsCount; i++) {
       },
     });
     console.log(`Created review with id: ${createdReview.id}`);
+  }
+
+  const createdOrder = await prisma.order.create({
+    data: {
+      total: faker.number.int({ min: 100, max: 500 }),
+      status: faker.helpers.arrayElement(["PENDING", "PAID", "SHIPPED"]),
+    },
+  });
+  console.log(`Created order with id: ${createdOrder.id}`);
+
+  for (let i = 0; i < orderItemsCount; i++) {
+    const createdOrderItem = await prisma.orderItem.create({
+      data: {
+        quantity: faker.number.int({ min: 1, max: 10 }),
+        order: {
+          connect: {
+            id: createdOrder.id,
+          },
+        },
+        product: {
+          connect: {
+            id: createdProduct.id,
+          },
+        },
+      },
+    });
+    console.log(`Created order item with id: ${createdOrderItem.id}`);
   }
 }

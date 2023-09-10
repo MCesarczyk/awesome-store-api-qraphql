@@ -1,0 +1,15 @@
+extend type Query {
+	order(id: ID!): Order
+	orders(first: Int, skip: Int): [Order]
+}
+
+type Order {
+	id: ID!
+	total: Int!
+	status: String!
+
+	orderItems: [OrderItem!]!
+
+	createdAt: DateTime!
+	updatedAt: DateTime!
+}

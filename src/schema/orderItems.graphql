@@ -1,0 +1,7 @@
+type OrderItem {
+	id: ID!
+	quantity: Int!
+
+	createdAt: DateTime!
+	updatedAt: DateTime!
+}

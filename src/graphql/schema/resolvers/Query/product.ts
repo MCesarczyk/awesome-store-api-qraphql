@@ -15,5 +15,5 @@ export const product: NonNullable<QueryResolvers["product"]> = async (
 		return null;
 	}
 
-	return { ...product, reviews: [] };
+	return { ...product, reviews: [], orderItems: [] };
 };
