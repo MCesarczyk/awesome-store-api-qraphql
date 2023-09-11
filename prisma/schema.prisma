@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Product {
+model Product { 
   id          String @id @default(cuid())
   name        String
   slug        String
@@ -21,8 +21,10 @@ model Product {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  reviews    Review[]
-  orderItems OrderItem[]
+  reviews     Review[]
+  orderItems  OrderItem[]
+  categories  Category[]
+  collections Collection[]
 }
 
 model Review {
@@ -61,4 +63,24 @@ model Order {
   updatedAt DateTime @updatedAt
 
   orderItems OrderItem[]
+}
+
+model Category {
+  id   String @id @default(cuid())
+  name String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products Product[]
+}
+
+model Collection {
+  id   String @id @default(cuid())
+  name String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products Product[]
 }

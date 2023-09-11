@@ -23,4 +23,28 @@ export const Product: ProductResolvers = {
 
 		return orderItems ?? [];
 	},
+
+	async categories(parent, _args, ctx) {
+		const categories = await ctx.prisma.product
+			.findUnique({
+				where: {
+					id: parent.id,
+				},
+			})
+			.categories();
+
+		return categories ?? [];
+	},
+
+	async collections(parent, _args, ctx) {
+		const collections = await ctx.prisma.product
+			.findUnique({
+				where: {
+					id: parent.id,
+				},
+			})
+			.collections();
+
+		return collections ?? [];
+	},
 };

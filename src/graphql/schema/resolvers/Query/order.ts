@@ -1,4 +1,5 @@
 import type { QueryResolvers } from "./../../../types.generated";
+
 export const order: NonNullable<QueryResolvers["order"]> = async (
 	_parent,
 	arg,

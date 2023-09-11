@@ -1,4 +1,5 @@
 import type { OrderResolvers } from "./../../types.generated";
+
 export const Order: OrderResolvers = {
 	async orderItems(parent, _args, ctx) {
 		const orderItems = await ctx.prisma.order

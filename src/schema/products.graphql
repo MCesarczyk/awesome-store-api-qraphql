@@ -3,21 +3,19 @@ extend type Query {
 	products(first: Int, skip: Int): [Product]
 }
 
-type Image {
-	url: String!
-}
-
 type Product {
 	id: ID!
 	name: String!
-  slug: String!
+	slug: String!
 	description: String!
 	price: Int!
-	images: [Image!]!
-
-	reviews: [Review!]!
-  orderItems: [OrderItem!]!
+	image: String!
 
 	createdAt: DateTime!
 	updatedAt: DateTime!
+
+	reviews: [Review]
+	orderItems: [OrderItem]
+	categories: [Category]
+	collections: [Collection]
 }

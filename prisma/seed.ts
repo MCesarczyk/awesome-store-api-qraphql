@@ -5,7 +5,43 @@ const prisma = new PrismaClient();
 
 const productsCount = 5;
 const reviewsCount = 2;
-const orderItemsCount = 10;
+const orderItemsCount = 2;
+const categoriesCount = 5;
+const collectionsCount = 5;
+
+let categories = <{
+  id: string;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+}[]>[];
+
+let collections = <{
+  id: string;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+}[]>[];
+
+for (let i = 0; i < categoriesCount; i++) {
+  const createdCategory = await prisma.category.create({
+    data: {
+      name: faker.commerce.department(),
+    },
+  });
+
+  categories.push(createdCategory);
+}
+
+for (let i = 0; i < collectionsCount; i++) {
+  const createdCollection = await prisma.collection.create({
+    data: {
+      name: faker.commerce.department(),
+    },
+  });
+
+  collections.push(createdCollection);
+}
 
 for (let i = 0; i < productsCount; i++) {
   const name = faker.commerce.productName();
@@ -16,6 +52,41 @@ for (let i = 0; i < productsCount; i++) {
       slug: faker.helpers.slugify(name).toLowerCase(),
       description: faker.commerce.productDescription(),
       price: Number(faker.commerce.price()) * 100,
+      image: faker.image.url(),
+      categories: {
+        connect: faker.helpers.arrayElements([1, 2, 3, 4, 5], 3).map((categoryId) => ({
+          id: categories[categoryId - 1].id,
+        })),
+
+        // create: [
+        //   {
+        //     name: 'Health',
+        //   },
+        //   {
+        //     name: 'Tools',
+        //   },
+        //   {
+        //     name: 'Jewelery',
+        //   },
+        // ],
+      },
+      collections: {
+        connect: faker.helpers.arrayElements([1, 2, 3, 4, 5], 3).map((collectionId) => ({
+          id: collections[collectionId - 1].id,
+        })),
+
+        // create: [
+        //   {
+        //     name: 'Automotive',
+        //   },
+        //   {
+        //     name: 'Movies',
+        //   },
+        //   {
+        //     name: 'Home',
+        //   },
+        // ],
+      },
     },
   });
   console.log(`Created product with id: ${createdProduct.id}`);

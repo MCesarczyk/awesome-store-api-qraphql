@@ -1,0 +1,14 @@
+extend type Query {
+	collection(id: ID!): Collection
+	collections(first: Int, skip: Int): [Collection]
+}
+
+type Collection {
+	id: ID!
+	name: String!
+
+	createdAt: DateTime!
+	updatedAt: DateTime!
+
+	products: [Product]
+}
