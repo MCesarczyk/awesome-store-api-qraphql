@@ -8,6 +8,7 @@ const reviewsCount = 2;
 const orderItemsCount = 2;
 const categoriesCount = 5;
 const collectionsCount = 5;
+const imagesCount = 20;
 
 let categories = <{
   id: string;
@@ -19,6 +20,14 @@ let categories = <{
 let collections = <{
   id: string;
   name: string;
+  createdAt: Date;
+  updatedAt: Date;
+}[]>[];
+
+let images = <{
+  id: string;
+  alt: string;
+  url: string;
   createdAt: Date;
   updatedAt: Date;
 }[]>[];
@@ -43,6 +52,17 @@ for (let i = 0; i < collectionsCount; i++) {
   collections.push(createdCollection);
 }
 
+for (let i = 0; i < imagesCount; i++) {
+  const createdImage = await prisma.image.create({
+    data: {
+      url: faker.image.url(),
+      alt: faker.lorem.sentence(),
+    },
+  });
+
+  images.push(createdImage);
+}
+
 for (let i = 0; i < productsCount; i++) {
   const name = faker.commerce.productName();
 
@@ -52,40 +72,20 @@ for (let i = 0; i < productsCount; i++) {
       slug: faker.helpers.slugify(name).toLowerCase(),
       description: faker.commerce.productDescription(),
       price: Number(faker.commerce.price()) * 100,
-      image: faker.image.url(),
+      images: {
+        connect: {
+          id: faker.helpers.arrayElement(images).id,
+        },
+      },
       categories: {
         connect: faker.helpers.arrayElements([1, 2, 3, 4, 5], 3).map((categoryId) => ({
           id: categories[categoryId - 1].id,
         })),
-
-        // create: [
-        //   {
-        //     name: 'Health',
-        //   },
-        //   {
-        //     name: 'Tools',
-        //   },
-        //   {
-        //     name: 'Jewelery',
-        //   },
-        // ],
       },
       collections: {
         connect: faker.helpers.arrayElements([1, 2, 3, 4, 5], 3).map((collectionId) => ({
           id: collections[collectionId - 1].id,
         })),
-
-        // create: [
-        //   {
-        //     name: 'Automotive',
-        //   },
-        //   {
-        //     name: 'Movies',
-        //   },
-        //   {
-        //     name: 'Home',
-        //   },
-        // ],
       },
     },
   });
@@ -110,7 +110,7 @@ for (let i = 0; i < productsCount; i++) {
   const createdOrder = await prisma.order.create({
     data: {
       total: faker.number.int({ min: 100, max: 500 }),
-      status: faker.helpers.arrayElement(["PENDING", "PAID", "SHIPPED"]),
+      status: faker.helpers.arrayElement(["PENDING", "PAID", "SHIPPED", "CANCELLED"]),
     },
   });
   console.log(`Created order with id: ${createdOrder.id}`);

@@ -1,0 +1,8 @@
+type Image {
+	id: ID!
+	url: String!
+	alt: String!
+
+	createdAt: DateTime!
+	updatedAt: DateTime!
+}

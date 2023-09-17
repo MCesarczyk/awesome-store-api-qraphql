@@ -57,6 +57,10 @@ export type Collection = {
 
 export type Image = {
 	__typename?: "Image";
+	alt: Scalars["String"]["output"];
+	createdAt: Scalars["DateTime"]["output"];
+	id: Scalars["ID"]["output"];
+	updatedAt: Scalars["DateTime"]["output"];
 	url: Scalars["String"]["output"];
 };
 
@@ -85,7 +89,7 @@ export type Product = {
 	createdAt: Scalars["DateTime"]["output"];
 	description: Scalars["String"]["output"];
 	id: Scalars["ID"]["output"];
-	image: Image;
+	images: Array<Maybe<Image>>;
 	name: Scalars["String"]["output"];
 	orderItems?: Maybe<Array<Maybe<OrderItem>>>;
 	price: Scalars["Int"]["output"];
@@ -335,6 +339,10 @@ export type ImageResolvers<
 	ParentType extends
 		ResolversParentTypes["Image"] = ResolversParentTypes["Image"],
 > = {
+	alt?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+	createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+	id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+	updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
 	url?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -387,7 +395,11 @@ export type ProductResolvers<
 	createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
 	description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
-	image?: Resolver<ResolversTypes["Image"], ParentType, ContextType>;
+	images?: Resolver<
+		Array<Maybe<ResolversTypes["Image"]>>,
+		ParentType,
+		ContextType
+	>;
 	name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	orderItems?: Resolver<
 		Maybe<Array<Maybe<ResolversTypes["OrderItem"]>>>,

@@ -1,14 +1,14 @@
-import type { Image, QueryResolvers } from "./../../../types.generated";
+import type { QueryResolvers } from "./../../../types.generated";
 
 export const products: NonNullable<QueryResolvers["products"]> = async (
 	_parent,
-	_arg,
+	arg,
 	ctx,
 ) => {
-	const products = await ctx.prisma.product.findMany();
+	const products = await ctx.prisma.product.findMany({ skip: arg.skip ?? undefined, take: arg.first ?? undefined });
 	return products.map((product) => ({
 		...product,
-		image: product.image as unknown as Image,
+		images: [],
 		reviews: [],
 		orderItems: [],
 		categories: [],

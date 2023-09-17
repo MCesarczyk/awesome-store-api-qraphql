@@ -1,4 +1,4 @@
-import type { Image, QueryResolvers } from "./../../../types.generated";
+import type { QueryResolvers } from "./../../../types.generated";
 
 export const product: NonNullable<QueryResolvers["product"]> = async (
 	_parent,
@@ -10,6 +10,7 @@ export const product: NonNullable<QueryResolvers["product"]> = async (
 			id: arg.id,
 		},
 		include: {
+			images: true,
 			reviews: true,
 			orderItems: true,
 			categories: true,
@@ -23,20 +24,20 @@ export const product: NonNullable<QueryResolvers["product"]> = async (
 
 	return {
 		...product,
-		image: product.image as unknown as Image,
+		images: [],
 		reviews: [],
 		orderItems: [],
 		categories: [
 			{
 				...product.categories[0],
 				products: [],
-			}
+			},
 		],
 		collections: [
 			{
 				...product.collections[0],
 				products: [],
-			}
+			},
 		],
 	};
 };

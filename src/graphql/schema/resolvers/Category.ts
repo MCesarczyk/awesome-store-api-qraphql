@@ -10,9 +10,11 @@ export const Category: CategoryResolvers = {
 			})
 			.products();
 
-		return products?.map(prod => ({
-			...prod,
-			image: prod.image as unknown as Image,
-		})) ?? [];
+		return (
+			products?.map((prod) => ({
+				...prod,
+				image: prod.image as unknown as Image,
+			})) ?? []
+		);
 	},
 };
