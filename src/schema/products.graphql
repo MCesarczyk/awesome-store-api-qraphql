@@ -9,13 +9,13 @@ type Product {
 	slug: String!
 	description: String!
 	price: Int!
-	images: [Image]
+	images: [Image]!
 
 	createdAt: DateTime!
 	updatedAt: DateTime!
 
-	reviews: [Review]
-	orderItems: [OrderItem]
-	categories: [Category]
-	collections: [Collection]
+	reviews: [Review]!
+	orderItems: [OrderItem]!
+	categories: [Category]!
+	collections: [Collection]!
 }

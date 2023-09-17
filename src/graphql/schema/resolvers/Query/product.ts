@@ -28,16 +28,16 @@ export const product: NonNullable<QueryResolvers["product"]> = async (
 		reviews: [],
 		orderItems: [],
 		categories: [
-			{
-				...product.categories[0],
-				products: [],
-			},
+			// {
+			// 	...product.categories[0],
+			// 	products: [],
+			// },
 		],
 		collections: [
-			{
-				...product.collections[0],
-				products: [],
-			},
+			// {
+			// 	...product.collections[0],
+			// 	products: [],
+			// },
 		],
 	};
 };

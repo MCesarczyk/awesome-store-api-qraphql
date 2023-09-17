@@ -37,7 +37,7 @@ export const Product: ProductResolvers = {
 	},
 
 	async categories(parent, _args, ctx) {
-		const categories = await ctx.prisma.product
+		const response = await ctx.prisma.product
 			.findUnique({
 				where: {
 					id: parent.id,
@@ -45,17 +45,27 @@ export const Product: ProductResolvers = {
 			})
 			.categories();
 
+		const categories = response?.map((category) => ({
+			...category,
+			products: [],
+		}));
+
 		return categories ?? [];
 	},
 
 	async collections(parent, _args, ctx) {
-		const collections = await ctx.prisma.product
+		const response = await ctx.prisma.product
 			.findUnique({
 				where: {
 					id: parent.id,
 				},
 			})
 			.collections();
+
+		const collections = response?.map((collection) => ({
+			...collection,
+			products: [],
+		}));
 
 		return collections ?? [];
 	},

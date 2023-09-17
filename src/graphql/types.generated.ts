@@ -42,7 +42,7 @@ export type Category = {
 	createdAt: Scalars["DateTime"]["output"];
 	id: Scalars["ID"]["output"];
 	name: Scalars["String"]["output"];
-	products?: Maybe<Array<Maybe<Product>>>;
+	products: Array<Maybe<Product>>;
 	updatedAt: Scalars["DateTime"]["output"];
 };
 
@@ -51,7 +51,7 @@ export type Collection = {
 	createdAt: Scalars["DateTime"]["output"];
 	id: Scalars["ID"]["output"];
 	name: Scalars["String"]["output"];
-	products?: Maybe<Array<Maybe<Product>>>;
+	products: Array<Maybe<Product>>;
 	updatedAt: Scalars["DateTime"]["output"];
 };
 
@@ -84,16 +84,16 @@ export type OrderItem = {
 
 export type Product = {
 	__typename?: "Product";
-	categories?: Maybe<Array<Maybe<Category>>>;
-	collections?: Maybe<Array<Maybe<Collection>>>;
+	categories: Array<Maybe<Category>>;
+	collections: Array<Maybe<Collection>>;
 	createdAt: Scalars["DateTime"]["output"];
 	description: Scalars["String"]["output"];
 	id: Scalars["ID"]["output"];
 	images: Array<Maybe<Image>>;
 	name: Scalars["String"]["output"];
-	orderItems?: Maybe<Array<Maybe<OrderItem>>>;
+	orderItems: Array<Maybe<OrderItem>>;
 	price: Scalars["Int"]["output"];
-	reviews?: Maybe<Array<Maybe<Review>>>;
+	reviews: Array<Maybe<Review>>;
 	slug: Scalars["String"]["output"];
 	updatedAt: Scalars["DateTime"]["output"];
 };
@@ -304,7 +304,7 @@ export type CategoryResolvers<
 	id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
 	name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	products?: Resolver<
-		Maybe<Array<Maybe<ResolversTypes["Product"]>>>,
+		Array<Maybe<ResolversTypes["Product"]>>,
 		ParentType,
 		ContextType
 	>;
@@ -321,7 +321,7 @@ export type CollectionResolvers<
 	id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
 	name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	products?: Resolver<
-		Maybe<Array<Maybe<ResolversTypes["Product"]>>>,
+		Array<Maybe<ResolversTypes["Product"]>>,
 		ParentType,
 		ContextType
 	>;
@@ -383,12 +383,12 @@ export type ProductResolvers<
 		ResolversParentTypes["Product"] = ResolversParentTypes["Product"],
 > = {
 	categories?: Resolver<
-		Maybe<Array<Maybe<ResolversTypes["Category"]>>>,
+		Array<Maybe<ResolversTypes["Category"]>>,
 		ParentType,
 		ContextType
 	>;
 	collections?: Resolver<
-		Maybe<Array<Maybe<ResolversTypes["Collection"]>>>,
+		Array<Maybe<ResolversTypes["Collection"]>>,
 		ParentType,
 		ContextType
 	>;
@@ -402,13 +402,13 @@ export type ProductResolvers<
 	>;
 	name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	orderItems?: Resolver<
-		Maybe<Array<Maybe<ResolversTypes["OrderItem"]>>>,
+		Array<Maybe<ResolversTypes["OrderItem"]>>,
 		ParentType,
 		ContextType
 	>;
 	price?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
 	reviews?: Resolver<
-		Maybe<Array<Maybe<ResolversTypes["Review"]>>>,
+		Array<Maybe<ResolversTypes["Review"]>>,
 		ParentType,
 		ContextType
 	>;

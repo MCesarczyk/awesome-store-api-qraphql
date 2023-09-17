@@ -10,5 +10,5 @@ type Collection {
 	createdAt: DateTime!
 	updatedAt: DateTime!
 
-	products: [Product]
+	products: [Product]!
 }
