@@ -1,12 +1,12 @@
 import type { QueryResolvers } from "./../../../types.generated";
 export const category: NonNullable<QueryResolvers["category"]> = async (
 	_parent,
-	_arg,
-	_ctx,
+	arg,
+	ctx,
 ) => {
-	const category = await _ctx.prisma.category.findUnique({
+	const category = await ctx.prisma.category.findUnique({
 		where: {
-			id: _arg.id,
+			id: arg.id,
 		},
 		include: {
 			products: true,

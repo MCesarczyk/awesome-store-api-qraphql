@@ -3,16 +3,18 @@ import { faker } from "@faker-js/faker";
 
 const prisma = new PrismaClient();
 
-const productsCount = 5;
-const reviewsCount = 2;
+const productsCount = 50;
+const reviewsCount = 3;
 const orderItemsCount = 2;
 const categoriesCount = 5;
 const collectionsCount = 5;
-const imagesCount = 20;
+const imagesCount = 100;
 
 let categories = <{
   id: string;
   name: string;
+  slug: string;
+  description: string;
   createdAt: Date;
   updatedAt: Date;
 }[]>[];
@@ -20,6 +22,8 @@ let categories = <{
 let collections = <{
   id: string;
   name: string;
+  slug: string;
+  description: string;
   createdAt: Date;
   updatedAt: Date;
 }[]>[];
@@ -33,9 +37,13 @@ let images = <{
 }[]>[];
 
 for (let i = 0; i < categoriesCount; i++) {
+  const categoryName = faker.commerce.department();
+
   const createdCategory = await prisma.category.create({
     data: {
-      name: faker.commerce.department(),
+      name: categoryName,
+      slug: faker.helpers.slugify(categoryName).toLowerCase(),
+      description: faker.commerce.productDescription(),
     },
   });
 
@@ -43,9 +51,13 @@ for (let i = 0; i < categoriesCount; i++) {
 }
 
 for (let i = 0; i < collectionsCount; i++) {
+  const collectionName = faker.commerce.department();
+
   const createdCollection = await prisma.collection.create({
     data: {
-      name: faker.commerce.department(),
+      name: collectionName,
+      slug: faker.helpers.slugify(collectionName).toLowerCase(),
+      description: faker.commerce.productDescription(),
     },
   });
 
@@ -78,12 +90,12 @@ for (let i = 0; i < productsCount; i++) {
         },
       },
       categories: {
-        connect: faker.helpers.arrayElements([1, 2, 3, 4, 5], 3).map((categoryId) => ({
+        connect: faker.helpers.arrayElements(Array.from({ length: categoriesCount }, (_, i) => i + 1), 3).map((categoryId) => ({
           id: categories[categoryId - 1].id,
         })),
       },
       collections: {
-        connect: faker.helpers.arrayElements([1, 2, 3, 4, 5], 3).map((collectionId) => ({
+        connect: faker.helpers.arrayElements(Array.from({ length: collectionsCount }, (_, i) => i + 1), 3).map((collectionId) => ({
           id: collections[collectionId - 1].id,
         })),
       },

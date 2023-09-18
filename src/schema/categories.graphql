@@ -1,14 +1,16 @@
 extend type Query {
 	category(id: ID!): Category
-	categories(first: Int, skip: Int): [Category]
+	categories(first: Int, skip: Int, slug: String): [Category]!
 }
 
 type Category {
 	id: ID!
 	name: String!
+	slug: String!
+	description: String!
 
 	createdAt: DateTime!
 	updatedAt: DateTime!
 
-	products: [Product]!
+	products(first: Int, skip: Int): [Product]!
 }

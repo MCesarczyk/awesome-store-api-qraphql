@@ -1,4 +1,4 @@
-import type { CategoryResolvers, Image } from "./../../types.generated";
+import type { CategoryResolvers } from "./../../types.generated";
 
 export const Category: CategoryResolvers = {
 	async products(parent, _args, ctx) {
