@@ -1,14 +1,16 @@
 extend type Query {
 	collection(id: ID!): Collection
-	collections(first: Int, skip: Int): [Collection]
+	collections(first: Int, skip: Int, slug: String): [Collection]
 }
 
 type Collection {
 	id: ID!
 	name: String!
+	slug: String!
+	description: String!
 
 	createdAt: DateTime!
 	updatedAt: DateTime!
 
-	products: [Product]!
+	products(first: Int, skip: Int): [Product]!
 }

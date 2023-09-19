@@ -56,10 +56,17 @@ export type CategoryProductsArgs = {
 export type Collection = {
 	__typename?: "Collection";
 	createdAt: Scalars["DateTime"]["output"];
+	description: Scalars["String"]["output"];
 	id: Scalars["ID"]["output"];
 	name: Scalars["String"]["output"];
 	products: Array<Maybe<Product>>;
+	slug: Scalars["String"]["output"];
 	updatedAt: Scalars["DateTime"]["output"];
+};
+
+export type CollectionProductsArgs = {
+	first?: InputMaybe<Scalars["Int"]["input"]>;
+	skip?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type Image = {
@@ -134,6 +141,7 @@ export type QueryCollectionArgs = {
 export type QueryCollectionsArgs = {
 	first?: InputMaybe<Scalars["Int"]["input"]>;
 	skip?: InputMaybe<Scalars["Int"]["input"]>;
+	slug?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type QueryOrderArgs = {
@@ -151,6 +159,7 @@ export type QueryProductArgs = {
 
 export type QueryProductsArgs = {
 	category?: InputMaybe<Scalars["String"]["input"]>;
+	collection?: InputMaybe<Scalars["String"]["input"]>;
 	first?: InputMaybe<Scalars["Int"]["input"]>;
 	skip?: InputMaybe<Scalars["Int"]["input"]>;
 };
@@ -330,13 +339,16 @@ export type CollectionResolvers<
 		ResolversParentTypes["Collection"] = ResolversParentTypes["Collection"],
 > = {
 	createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+	description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
 	name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	products?: Resolver<
 		Array<Maybe<ResolversTypes["Product"]>>,
 		ParentType,
-		ContextType
+		ContextType,
+		Partial<CollectionProductsArgs>
 	>;
+	slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
