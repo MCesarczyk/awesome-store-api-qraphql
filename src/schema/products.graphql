@@ -1,6 +1,12 @@
+input ProductsInputFilter {
+  id: ID
+  name: String
+	description: String
+}
+
 extend type Query {
 	product(id: ID!): Product
-	products(first: Int, skip: Int, category: String, collection: String): [Product]
+	products(where: String, first: Int, skip: Int, category: String, collection: String, name: String, description: String): [Product]
 }
 
 type Product {
@@ -8,6 +14,8 @@ type Product {
 	name: String!
 	slug: String!
 	description: String!
+	sizes: [ProductSize!]!
+	colors: [ProductColor!]!
 	price: Int!
 	images: [Image!]!
 

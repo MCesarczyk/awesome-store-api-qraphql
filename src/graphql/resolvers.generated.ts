@@ -6,6 +6,8 @@ import { Image } from "./schema/resolvers/Image";
 import { Order } from "./schema/resolvers/Order";
 import { OrderItem } from "./schema/resolvers/OrderItem";
 import { Product } from "./schema/resolvers/Product";
+import { ProductColor } from "./schema/resolvers/ProductColor";
+import { ProductSize } from "./schema/resolvers/ProductSize";
 import { categories as Query_categories } from "./schema/resolvers/Query/categories";
 import { category as Query_category } from "./schema/resolvers/Query/category";
 import { collection as Query_collection } from "./schema/resolvers/Query/collection";
@@ -34,6 +36,8 @@ export const resolvers: Resolvers = {
 	Order: Order,
 	OrderItem: OrderItem,
 	Product: Product,
+	ProductColor: ProductColor,
+	ProductSize: ProductSize,
 	Review: Review,
 	DateTime: DateTimeResolver,
 };

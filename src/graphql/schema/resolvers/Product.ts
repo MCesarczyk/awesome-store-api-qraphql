@@ -12,6 +12,30 @@ export const Product: ProductResolvers = {
 		return images ?? [];
 	},
 
+	async colors(parent, _args, ctx) {
+		const colors = await ctx.prisma.product
+			.findUnique({
+				where: {
+					id: parent.id,
+				},
+			})
+			.colors();
+
+		return colors ?? [];
+	},
+
+	async sizes(parent, _args, ctx) {
+		const sizes = await ctx.prisma.product
+			.findUnique({
+				where: {
+					id: parent.id,
+				},
+			})
+			.sizes();
+
+		return sizes ?? [];
+	},
+
 	async reviews(parent, _args, ctx) {
 		const reviews = await ctx.prisma.product
 			.findUnique({

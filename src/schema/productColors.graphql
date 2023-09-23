@@ -1,0 +1,10 @@
+type ProductColor {
+	id: ID!
+	name: String!
+	value: String!
+
+	products: [Product!]!
+
+	createdAt: DateTime!
+	updatedAt: DateTime!
+}

@@ -11,6 +11,8 @@ export const product: NonNullable<QueryResolvers["product"]> = async (
 		},
 		include: {
 			images: true,
+			colors: true,
+			sizes: true,
 			reviews: true,
 			orderItems: true,
 			categories: true,
@@ -25,19 +27,11 @@ export const product: NonNullable<QueryResolvers["product"]> = async (
 	return {
 		...product,
 		images: [],
+		colors: [],
+		sizes: [],
 		reviews: [],
 		orderItems: [],
-		categories: [
-			// {
-			// 	...product.categories[0],
-			// 	products: [],
-			// },
-		],
-		collections: [
-			// {
-			// 	...product.collections[0],
-			// 	products: [],
-			// },
-		],
+		categories: [],
+		collections: [],
 	};
 };

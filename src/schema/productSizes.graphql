@@ -1,0 +1,9 @@
+type ProductSize {
+	id: ID!
+	name: String!
+
+	products: [Product!]!
+
+	createdAt: DateTime!
+	updatedAt: DateTime!
+}

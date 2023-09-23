@@ -1,4 +1,4 @@
-import type { CollectionResolvers, Image } from "./../../types.generated";
+import type { CollectionResolvers } from "./../../types.generated";
 
 export const Collection: CollectionResolvers = {
 	async products(parent, _args, ctx) {
@@ -14,6 +14,8 @@ export const Collection: CollectionResolvers = {
 			products?.map((product) => ({
 				...product,
 				images: [],
+				colors: [],
+				sizes: [],
 				reviews: [],
 				orderItems: [],
 				categories: [],

@@ -11,8 +11,23 @@ export const products: NonNullable<QueryResolvers["products"]> = async (
 		where: {
 			categories: {
 				some: {
-					slug: "category" in arg ? (arg.category as string) : undefined,
+					name: {
+						contains: arg.category ?? undefined,
+					},
 				},
+			},
+			collections: {
+				some: {
+					name: {
+						contains: arg.collection ?? undefined,
+					},
+				},
+			},
+			name: {
+				contains: arg.name ?? undefined,
+			},
+			description: {
+				contains: arg.description ?? undefined,
 			},
 		},
 	});
@@ -20,6 +35,8 @@ export const products: NonNullable<QueryResolvers["products"]> = async (
 		...product,
 		images: [],
 		reviews: [],
+		colors: [],
+		sizes: [],
 		orderItems: [],
 		categories: [],
 		collections: [],

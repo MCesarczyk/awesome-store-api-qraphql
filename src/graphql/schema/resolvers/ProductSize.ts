@@ -1,8 +1,8 @@
-import type { CategoryResolvers } from "./../../types.generated";
+import type { ProductSizeResolvers } from "./../../types.generated";
 
-export const Category: CategoryResolvers = {
+export const ProductSize: ProductSizeResolvers = {
 	async products(parent, _args, ctx) {
-		const products = await ctx.prisma.category
+		const products = await ctx.prisma.productSize
 			.findUnique({
 				where: {
 					id: parent.id,

@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { faker } from "@faker-js/faker";
+import { fa, faker } from "@faker-js/faker";
 
 const prisma = new PrismaClient();
 
@@ -9,6 +9,8 @@ const orderItemsCount = 2;
 const categoriesCount = 5;
 const collectionsCount = 5;
 const imagesCount = 100;
+const colorsCount = 5;
+const sizesCount = 5;
 
 let categories = <{
   id: string;
@@ -36,15 +38,34 @@ let images = <{
   updatedAt: Date;
 }[]>[];
 
+let colors = <{
+  id: string;
+  name: string;
+  value: string;
+  createdAt: Date;
+  updatedAt: Date;
+}[]>[];
+
+let sizes = <{
+  id: string;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+}[]>[];
+
 for (let i = 0; i < categoriesCount; i++) {
   const categoryName = faker.commerce.department();
 
-  const createdCategory = await prisma.category.create({
-    data: {
+  const createdCategory = await prisma.category.upsert({
+    where: {
+      name: categoryName,
+    },
+    create: {
       name: categoryName,
       slug: faker.helpers.slugify(categoryName).toLowerCase(),
       description: faker.commerce.productDescription(),
     },
+    update: {},
   });
 
   categories.push(createdCategory);
@@ -53,12 +74,16 @@ for (let i = 0; i < categoriesCount; i++) {
 for (let i = 0; i < collectionsCount; i++) {
   const collectionName = faker.commerce.department();
 
-  const createdCollection = await prisma.collection.create({
-    data: {
+  const createdCollection = await prisma.collection.upsert({
+    where: {
+      name: collectionName,
+    },
+    create: {
       name: collectionName,
       slug: faker.helpers.slugify(collectionName).toLowerCase(),
       description: faker.commerce.productDescription(),
     },
+    update: {},
   });
 
   collections.push(createdCollection);
@@ -75,6 +100,39 @@ for (let i = 0; i < imagesCount; i++) {
   images.push(createdImage);
 }
 
+for (let i = 0; i < colorsCount; i++) {
+  const availableColors = ["red", "yellow", "green", "blue", "indigo", "purple", "pink"];
+
+  const createdColor = await prisma.productColor.upsert({
+    where: {
+      name: availableColors[i],
+    },
+    create: {
+      name: availableColors[i],
+      value: faker.color.rgb(),
+    },
+    update: {},
+  });
+
+  colors.push(createdColor);
+}
+
+for (let i = 0; i < sizesCount; i++) {
+  const availableSizes = ["XS", "S", "M", "L", "XL", "XXL"];
+
+  const createdSize = await prisma.productSize.upsert({
+    where: {
+      name: availableSizes[i],
+    },
+    create: {
+      name: availableSizes[i],
+    },
+    update: {},
+  });
+
+  sizes.push(createdSize);
+}
+
 for (let i = 0; i < productsCount; i++) {
   const name = faker.commerce.productName();
 
@@ -83,11 +141,17 @@ for (let i = 0; i < productsCount; i++) {
       name: name,
       slug: faker.helpers.slugify(name).toLowerCase(),
       description: faker.commerce.productDescription(),
+      sizes: {
+        connect: sizes,
+      },
+      colors: {
+        connect: colors,
+      },
       price: Number(faker.commerce.price()) * 100,
       images: {
-        connect: {
-          id: faker.helpers.arrayElement(images).id,
-        },
+        connect: faker.helpers.arrayElements(Array.from({ length: imagesCount }, (_, i) => i + 1), 3).map((imageId) => ({
+          id: images[imageId - 1].id,
+        })),
       },
       categories: {
         connect: faker.helpers.arrayElements(Array.from({ length: categoriesCount }, (_, i) => i + 1), 3).map((categoryId) => ({

@@ -11,10 +11,12 @@ datasource db {
 }
 
 model Product {
-  id          String  @id @default(cuid())
+  id          String         @id @default(cuid())
   name        String
   slug        String
   description String
+  colors      ProductColor[]
+  sizes       ProductSize[]
   price       Int
   images      Image[]
 
@@ -28,13 +30,15 @@ model Product {
 }
 
 model Image {
-  id          String   @id @default(cuid())
-  alt         String
-  url         String   @default("https://source.unsplash.com/random/400x300")
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  Product     Product? @relation(fields: [productId], references: [id])
-  productId   String?
+  id  String @id @default(cuid())
+  alt String
+  url String @default("https://source.unsplash.com/random/400x300")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  productId String?
+  Product   Product? @relation(fields: [productId], references: [id])
 }
 
 model Review {
@@ -76,9 +80,9 @@ model Order {
 }
 
 model Category {
-  id   String @id @default(cuid())
-  name String
-  slug String
+  id          String @id @default(cuid())
+  name        String @unique
+  slug        String @unique
   description String
 
   createdAt DateTime @default(now())
@@ -88,10 +92,31 @@ model Category {
 }
 
 model Collection {
-  id   String @id @default(cuid())
-  name String
-  slug String
+  id          String @id @default(cuid())
+  name        String @unique
+  slug        String @unique
   description String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products Product[]
+}
+
+model ProductColor {
+  id    String @id @default(cuid())
+  name  String @unique
+  value String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products Product[]
+}
+
+model ProductSize {
+  id   String @id @default(cuid())
+  name String @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
