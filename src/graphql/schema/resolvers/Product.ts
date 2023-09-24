@@ -13,7 +13,7 @@ export const Product: ProductResolvers = {
 	},
 
 	async colors(parent, _args, ctx) {
-		const colors = await ctx.prisma.product
+		const response = await ctx.prisma.product
 			.findUnique({
 				where: {
 					id: parent.id,
@@ -21,17 +21,27 @@ export const Product: ProductResolvers = {
 			})
 			.colors();
 
+		const colors = response?.map((color) => ({
+			...color,
+			products: [],
+		}));
+
 		return colors ?? [];
 	},
 
 	async sizes(parent, _args, ctx) {
-		const sizes = await ctx.prisma.product
+		const response = await ctx.prisma.product
 			.findUnique({
 				where: {
 					id: parent.id,
 				},
 			})
 			.sizes();
+
+		const sizes = response?.map((size) => ({
+			...size,
+			products: [],
+		}));
 
 		return sizes ?? [];
 	},
