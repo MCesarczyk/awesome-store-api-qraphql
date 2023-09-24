@@ -78,6 +78,28 @@ export type Image = {
 	url: Scalars["String"]["output"];
 };
 
+export type Mutation = {
+	__typename?: "Mutation";
+	createOrder: Order;
+	deleteOrder: Order;
+	updateOrder: Order;
+};
+
+export type MutationCreateOrderArgs = {
+	orderItem: Array<OrderItemInput>;
+};
+
+export type MutationDeleteOrderArgs = {
+	id: Scalars["ID"]["input"];
+};
+
+export type MutationUpdateOrderArgs = {
+	id: Scalars["ID"]["input"];
+	orderItems?: InputMaybe<Array<OrderItemInput>>;
+	status?: InputMaybe<Scalars["String"]["input"]>;
+	total?: InputMaybe<Scalars["Int"]["input"]>;
+};
+
 export type Order = {
 	__typename?: "Order";
 	createdAt: Scalars["DateTime"]["output"];
@@ -94,6 +116,11 @@ export type OrderItem = {
 	id: Scalars["ID"]["output"];
 	quantity: Scalars["Int"]["output"];
 	updatedAt: Scalars["DateTime"]["output"];
+};
+
+export type OrderItemInput = {
+	id: Scalars["ID"]["input"];
+	quantity: Scalars["Int"]["input"];
 };
 
 export type Product = {
@@ -321,8 +348,10 @@ export type ResolversTypes = {
 	Collection: ResolverTypeWrapper<Mapper<Collection>>;
 	DateTime: ResolverTypeWrapper<Mapper<Scalars["DateTime"]["output"]>>;
 	Image: ResolverTypeWrapper<Mapper<Image>>;
+	Mutation: ResolverTypeWrapper<{}>;
 	Order: ResolverTypeWrapper<Mapper<Order>>;
 	OrderItem: ResolverTypeWrapper<Mapper<OrderItem>>;
+	OrderItemInput: ResolverTypeWrapper<Mapper<OrderItemInput>>;
 	Product: ResolverTypeWrapper<Mapper<Product>>;
 	ProductColor: ResolverTypeWrapper<Mapper<ProductColor>>;
 	ProductSize: ResolverTypeWrapper<Mapper<ProductSize>>;
@@ -341,8 +370,10 @@ export type ResolversParentTypes = {
 	Collection: Mapper<Collection>;
 	DateTime: Mapper<Scalars["DateTime"]["output"]>;
 	Image: Mapper<Image>;
+	Mutation: {};
 	Order: Mapper<Order>;
 	OrderItem: Mapper<OrderItem>;
+	OrderItemInput: Mapper<OrderItemInput>;
 	Product: Mapper<Product>;
 	ProductColor: Mapper<ProductColor>;
 	ProductSize: Mapper<ProductSize>;
@@ -408,6 +439,31 @@ export type ImageResolvers<
 	updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
 	url?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MutationResolvers<
+	ContextType = Context,
+	ParentType extends
+		ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"],
+> = {
+	createOrder?: Resolver<
+		ResolversTypes["Order"],
+		ParentType,
+		ContextType,
+		RequireFields<MutationCreateOrderArgs, "orderItem">
+	>;
+	deleteOrder?: Resolver<
+		ResolversTypes["Order"],
+		ParentType,
+		ContextType,
+		RequireFields<MutationDeleteOrderArgs, "id">
+	>;
+	updateOrder?: Resolver<
+		ResolversTypes["Order"],
+		ParentType,
+		ContextType,
+		RequireFields<MutationUpdateOrderArgs, "id">
+	>;
 };
 
 export type OrderResolvers<
@@ -592,6 +648,7 @@ export type Resolvers<ContextType = Context> = {
 	Collection?: CollectionResolvers<ContextType>;
 	DateTime?: GraphQLScalarType;
 	Image?: ImageResolvers<ContextType>;
+	Mutation?: MutationResolvers<ContextType>;
 	Order?: OrderResolvers<ContextType>;
 	OrderItem?: OrderItemResolvers<ContextType>;
 	Product?: ProductResolvers<ContextType>;

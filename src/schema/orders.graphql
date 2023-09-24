@@ -3,6 +3,17 @@ extend type Query {
 	orders(first: Int, skip: Int, status: String): [Order]
 }
 
+input OrderItemInput {
+  quantity: Int!
+  id: ID!
+}
+
+extend type Mutation {
+	createOrder(orderItem: [OrderItemInput!]!): Order!
+	updateOrder(id: ID!, status: String, total: Int, orderItems: [OrderItemInput!]): Order!
+	deleteOrder(id: ID!): Order!
+}
+
 type Order {
 	id: ID!
 	total: Int!

@@ -3,6 +3,9 @@ import type { Resolvers } from "./types.generated";
 import { Category } from "./schema/resolvers/Category";
 import { Collection } from "./schema/resolvers/Collection";
 import { Image } from "./schema/resolvers/Image";
+import { createOrder as Mutation_createOrder } from "./schema/resolvers/Mutation/createOrder";
+import { deleteOrder as Mutation_deleteOrder } from "./schema/resolvers/Mutation/deleteOrder";
+import { updateOrder as Mutation_updateOrder } from "./schema/resolvers/Mutation/updateOrder";
 import { Order } from "./schema/resolvers/Order";
 import { OrderItem } from "./schema/resolvers/OrderItem";
 import { Product } from "./schema/resolvers/Product";
@@ -28,6 +31,11 @@ export const resolvers: Resolvers = {
 		orders: Query_orders,
 		product: Query_product,
 		products: Query_products,
+	},
+	Mutation: {
+		createOrder: Mutation_createOrder,
+		deleteOrder: Mutation_deleteOrder,
+		updateOrder: Mutation_updateOrder,
 	},
 
 	Category: Category,
