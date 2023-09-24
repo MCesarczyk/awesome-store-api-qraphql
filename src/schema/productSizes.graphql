@@ -1,6 +1,7 @@
 type ProductSize {
 	id: ID!
 	name: String!
+	value: Int!
 
 	products: [Product!]!
 

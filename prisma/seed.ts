@@ -49,6 +49,7 @@ let colors = <{
 let sizes = <{
   id: string;
   name: string;
+  value: number;
   createdAt: Date;
   updatedAt: Date;
 }[]>[];
@@ -126,6 +127,7 @@ for (let i = 0; i < sizesCount; i++) {
     },
     create: {
       name: availableSizes[i],
+      value: i + 1,
     },
     update: {},
   });

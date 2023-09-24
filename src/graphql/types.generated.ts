@@ -131,6 +131,7 @@ export type ProductSize = {
 	name: Scalars["String"]["output"];
 	products: Array<Product>;
 	updatedAt: Scalars["DateTime"]["output"];
+	value: Scalars["Int"]["output"];
 };
 
 export type ProductsInputFilter = {
@@ -511,6 +512,7 @@ export type ProductSizeResolvers<
 		ContextType
 	>;
 	updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+	value?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
