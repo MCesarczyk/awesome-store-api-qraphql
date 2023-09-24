@@ -15,7 +15,7 @@ const prisma = new PrismaClient({
 });
 
 const { url } = await startStandaloneServer(server, {
-  listen: { port: 4000 },
+  listen: { port: Number(process.env.PORT) || 4000 },
   context: async () => {
     return {
       prisma,
