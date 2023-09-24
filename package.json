@@ -7,6 +7,7 @@
   "scripts": {
     "build": "tsc",
     "serve": "node dist/src/server.js",
+    "deploy": "pnpm install && pnpm prisma migrate dev && pnpm prisma generate && pnpm dev",
     "codegen": "graphql-codegen --config .graphqlrc.ts",
     "postinstall": "pnpm codegen",
     "dev": "tsx watch src/server.ts",
