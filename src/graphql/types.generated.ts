@@ -174,11 +174,13 @@ export type QueryCollectionsArgs = {
 
 export type QueryOrderArgs = {
 	id: Scalars["ID"]["input"];
+	status?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type QueryOrdersArgs = {
 	first?: InputMaybe<Scalars["Int"]["input"]>;
 	skip?: InputMaybe<Scalars["Int"]["input"]>;
+	status?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type QueryProductArgs = {

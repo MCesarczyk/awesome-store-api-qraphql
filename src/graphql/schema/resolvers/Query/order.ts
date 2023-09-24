@@ -8,6 +8,7 @@ export const order: NonNullable<QueryResolvers["order"]> = async (
 	const order = await ctx.prisma.order.findUnique({
 		where: {
 			id: arg.id,
+			status: arg.status || undefined,
 		},
 	});
 
