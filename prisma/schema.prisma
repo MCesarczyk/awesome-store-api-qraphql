@@ -57,6 +57,7 @@ model Review {
 model OrderItem {
   id       String @id @default(cuid())
   quantity Int
+  total    Int    @default(0)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -115,9 +116,9 @@ model ProductColor {
 }
 
 model ProductSize {
-  id   String @id @default(cuid())
-  name String @unique
-  value Int @unique
+  id    String @id @default(cuid())
+  name  String @unique
+  value Int    @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

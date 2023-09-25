@@ -1,6 +1,26 @@
+input OrderInput {
+	id: ID!
+}
+
+input ProductInput {
+	id: ID!
+}
+
+extend type Mutation {
+	createOrderItem(
+		quantity: Int!
+		total: Int!
+		order: OrderInput!
+		product: ProductInput!
+	): OrderItem!
+}
+
 type OrderItem {
 	id: ID!
 	quantity: Int!
+	total: Int!
+	productId: ID!
+	orderId: ID!
 
 	createdAt: DateTime!
 	updatedAt: DateTime!
