@@ -10,9 +10,9 @@
   "scripts": {
     "build": "tsc",
     "serve": "node dist/src/server.js",
-    "deploy": "pnpm install && pnpm prisma migrate dev && pnpm prisma generate && pnpm dev",
+    "deploy": "npm install && npm prisma migrate dev && npm prisma generate && npm dev",
     "codegen": "graphql-codegen --config .graphqlrc.ts",
-    "postinstall": "pnpm codegen",
+    "postinstall": "npm codegen",
     "dev": "tsx watch src/server.ts",
     "seed": "tsx prisma/seed.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
