@@ -15,6 +15,16 @@ extend type Mutation {
 	): OrderItem!
 }
 
+extend type Mutation {
+	updateOrderItem(
+		id: ID!
+		quantity: Int!
+		total: Int!
+		order: OrderInput!
+		product: ProductInput!
+	): OrderItem!
+}
+
 type OrderItem {
 	id: ID!
 	quantity: Int!

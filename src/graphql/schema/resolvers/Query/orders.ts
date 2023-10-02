@@ -9,6 +9,12 @@ export const orders: NonNullable<QueryResolvers["orders"]> = async (
 		where: {
 			status: arg.status || undefined,
 		},
+		include: {
+			orderItems: true,
+		},
 	});
-	return orders.map((order) => ({ ...order, orderItems: [] }));
+	return orders.map((order) => ({
+		...order,
+		orderItems: order.orderItems ?? [],
+	}));
 };

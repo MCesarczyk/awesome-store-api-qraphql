@@ -7,6 +7,7 @@ import { createOrder as Mutation_createOrder } from "./schema/resolvers/Mutation
 import { createOrderItem as Mutation_createOrderItem } from "./schema/resolvers/Mutation/createOrderItem";
 import { deleteOrder as Mutation_deleteOrder } from "./schema/resolvers/Mutation/deleteOrder";
 import { updateOrder as Mutation_updateOrder } from "./schema/resolvers/Mutation/updateOrder";
+import { updateOrderItem as Mutation_updateOrderItem } from "./schema/resolvers/Mutation/updateOrderItem";
 import { Order } from "./schema/resolvers/Order";
 import { OrderItem } from "./schema/resolvers/OrderItem";
 import { Product } from "./schema/resolvers/Product";
@@ -38,6 +39,7 @@ export const resolvers: Resolvers = {
 		createOrderItem: Mutation_createOrderItem,
 		deleteOrder: Mutation_deleteOrder,
 		updateOrder: Mutation_updateOrder,
+		updateOrderItem: Mutation_updateOrderItem,
 	},
 
 	Category: Category,

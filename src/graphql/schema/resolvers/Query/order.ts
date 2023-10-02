@@ -10,11 +10,14 @@ export const order: NonNullable<QueryResolvers["order"]> = async (
 			id: arg.id,
 			status: arg.status || undefined,
 		},
+		include: {
+			orderItems: true,
+		},
 	});
 
 	if (!order) {
 		return null;
 	}
 
-	return { ...order, orderItems: [] };
+	return { ...order, orderItems: order.orderItems ?? [] };
 };

@@ -9,7 +9,7 @@ input OrderItemInput {
 }
 
 extend type Mutation {
-	createOrder(orderItem: [OrderItemInput!]!): Order!
+	createOrder(total: Int!): Order!
 	updateOrder(id: ID!, status: String, total: Int, orderItems: [OrderItemInput!]): Order!
 	deleteOrder(id: ID!): Order!
 }

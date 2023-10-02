@@ -28,7 +28,7 @@
     "graphql": "^16.8.0",
     "prettier": "^3.0.3",
     "prisma": "^5.2.0",
-    "tsx": "^3.12.8",
+    "tsx": "^3.12.10",
     "typescript": "^5.2.2"
   },
   "dependencies": {

@@ -84,10 +84,11 @@ export type Mutation = {
 	createOrderItem: OrderItem;
 	deleteOrder: Order;
 	updateOrder: Order;
+	updateOrderItem: OrderItem;
 };
 
 export type MutationCreateOrderArgs = {
-	orderItem: Array<OrderItemInput>;
+	total: Scalars["Int"]["input"];
 };
 
 export type MutationCreateOrderItemArgs = {
@@ -106,6 +107,14 @@ export type MutationUpdateOrderArgs = {
 	orderItems?: InputMaybe<Array<OrderItemInput>>;
 	status?: InputMaybe<Scalars["String"]["input"]>;
 	total?: InputMaybe<Scalars["Int"]["input"]>;
+};
+
+export type MutationUpdateOrderItemArgs = {
+	id: Scalars["ID"]["input"];
+	order: OrderInput;
+	product: ProductInput;
+	quantity: Scalars["Int"]["input"];
+	total: Scalars["Int"]["input"];
 };
 
 export type Order = {
@@ -473,7 +482,7 @@ export type MutationResolvers<
 		ResolversTypes["Order"],
 		ParentType,
 		ContextType,
-		RequireFields<MutationCreateOrderArgs, "orderItem">
+		RequireFields<MutationCreateOrderArgs, "total">
 	>;
 	createOrderItem?: Resolver<
 		ResolversTypes["OrderItem"],
@@ -495,6 +504,15 @@ export type MutationResolvers<
 		ParentType,
 		ContextType,
 		RequireFields<MutationUpdateOrderArgs, "id">
+	>;
+	updateOrderItem?: Resolver<
+		ResolversTypes["OrderItem"],
+		ParentType,
+		ContextType,
+		RequireFields<
+			MutationUpdateOrderItemArgs,
+			"id" | "order" | "product" | "quantity" | "total"
+		>
 	>;
 };
 
