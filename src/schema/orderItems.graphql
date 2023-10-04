@@ -13,9 +13,6 @@ extend type Mutation {
 		order: OrderInput!
 		product: ProductInput!
 	): OrderItem!
-}
-
-extend type Mutation {
 	updateOrderItem(
 		id: ID!
 		quantity: Int!
@@ -23,6 +20,7 @@ extend type Mutation {
 		order: OrderInput!
 		product: ProductInput!
 	): OrderItem!
+	updateProductQuantity(productId: ID!, quantity: Int!, total: Int!): OrderItem!
 }
 
 type OrderItem {

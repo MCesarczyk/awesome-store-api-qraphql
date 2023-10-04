@@ -85,6 +85,7 @@ export type Mutation = {
 	deleteOrder: Order;
 	updateOrder: Order;
 	updateOrderItem: OrderItem;
+	updateProductQuantity: OrderItem;
 };
 
 export type MutationCreateOrderArgs = {
@@ -113,6 +114,12 @@ export type MutationUpdateOrderItemArgs = {
 	id: Scalars["ID"]["input"];
 	order: OrderInput;
 	product: ProductInput;
+	quantity: Scalars["Int"]["input"];
+	total: Scalars["Int"]["input"];
+};
+
+export type MutationUpdateProductQuantityArgs = {
+	productId: Scalars["ID"]["input"];
 	quantity: Scalars["Int"]["input"];
 	total: Scalars["Int"]["input"];
 };
@@ -512,6 +519,15 @@ export type MutationResolvers<
 		RequireFields<
 			MutationUpdateOrderItemArgs,
 			"id" | "order" | "product" | "quantity" | "total"
+		>
+	>;
+	updateProductQuantity?: Resolver<
+		ResolversTypes["OrderItem"],
+		ParentType,
+		ContextType,
+		RequireFields<
+			MutationUpdateProductQuantityArgs,
+			"productId" | "quantity" | "total"
 		>
 	>;
 };
