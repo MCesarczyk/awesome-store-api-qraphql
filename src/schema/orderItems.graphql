@@ -21,6 +21,7 @@ extend type Mutation {
 		product: ProductInput!
 	): OrderItem!
 	updateProductQuantity(productId: ID!, quantity: Int!, total: Int!): OrderItem!
+	deleteOrderItem(id: ID!): OrderItem!
 }
 
 type OrderItem {
