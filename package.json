@@ -14,6 +14,7 @@
     "codegen": "graphql-codegen --config .graphqlrc.ts",
     "postinstall": "pnpm codegen",
     "dev": "tsx watch src/server.ts",
+    "start": "tsx watch src/server.ts",
     "seed": "tsx prisma/seed.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -27,13 +28,13 @@
     "cz-conventional-changelog": "^3.3.0",
     "graphql": "^16.8.0",
     "prettier": "^3.0.3",
-    "prisma": "^5.2.0",
+    "prisma": "^5.4.2",
     "tsx": "^3.12.10",
     "typescript": "^5.2.2"
   },
   "dependencies": {
     "@apollo/server": "^4.9.3",
-    "@prisma/client": "^5.2.0",
+    "@prisma/client": "^5.4.2",
     "graphql-scalars": "^1.22.2",
     "pnpm": "^8.8.0"
   },
