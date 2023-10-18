@@ -4,8 +4,8 @@ export const createOrderItem: NonNullable<
 > = async (_parent, arg, ctx) => {
 	const orderItem = await ctx.prisma.orderItem.create({
 		data: {
-			quantity: 0,
-			total: 0,
+			quantity: arg.quantity || 0,
+			total: arg.total || 0,
 			product: { connect: { id: arg.product.id } },
 			order: { connect: { id: arg.order.id } },
 		},
