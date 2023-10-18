@@ -12,9 +12,9 @@
     "serve": "node dist/src/server.js",
     "deploy": "pnpm install && pnpm prisma migrate dev && pnpm prisma generate && pnpm dev",
     "codegen": "graphql-codegen --config .graphqlrc.ts",
-    "postinstall": "pnpm codegen",
     "dev": "tsx watch src/server.ts",
-    "start": "tsx watch src/server.ts",
+    "start": "node src/server.js",
+    "postinstall": "tsc && pnpm codegen",
     "seed": "tsx prisma/seed.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -36,7 +36,9 @@
     "@apollo/server": "^4.9.3",
     "@prisma/client": "^5.4.2",
     "graphql-scalars": "^1.22.2",
-    "pnpm": "^8.8.0"
+    "node": "^21.0.0",
+    "pnpm": "^8.8.0",
+    "tsc": "^2.0.4"
   },
   "config": {
     "commitizen": {
