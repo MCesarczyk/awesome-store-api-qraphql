@@ -13,7 +13,7 @@
     "deploy": "pnpm install && pnpm prisma migrate dev && pnpm prisma generate && pnpm dev",
     "codegen": "graphql-codegen --config .graphqlrc.ts",
     "dev": "tsx watch src/server.ts",
-    "start": "node src/server.js",
+    "start": "node dist/src/server.js",
     "postinstall": "tsc && pnpm codegen",
     "seed": "tsx prisma/seed.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
