@@ -9,11 +9,11 @@
   "main": "index.js",
   "scripts": {
     "deploy": "pnpm install && pnpm prisma migrate dev && pnpm prisma generate && pnpm dev",
+    "seed": "tsx prisma/seed.ts",
     "codegen": "graphql-codegen --config .graphqlrc.ts",
     "dev": "tsx watch src/server.ts",
     "start": "node dist/src/server.js",
-    "postinstall": "tsc && pnpm codegen",
-    "seed": "tsx prisma/seed.ts",
+    "build": "tsc && pnpm codegen",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
