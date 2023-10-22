@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "serve": "node dist/src/server.js",
-    "deploy": "pnpm install && pnpm prisma migrate dev && pnpm prisma generate && pnpm dev",
+    "deploy": "pnpm add typescript && install && pnpm prisma migrate dev && pnpm prisma generate && pnpm dev",
     "codegen": "graphql-codegen --config .graphqlrc.ts",
     "dev": "tsx watch src/server.ts",
     "start": "node dist/src/server.js",
