@@ -29,8 +29,7 @@
     "graphql": "^16.8.0",
     "prettier": "^3.0.3",
     "prisma": "^5.4.2",
-    "tsx": "^3.12.10",
-    "typescript": "^5.2.2"
+    "tsx": "^3.12.10"
   },
   "dependencies": {
     "@apollo/server": "^4.9.3",
@@ -38,7 +37,8 @@
     "graphql-scalars": "^1.22.2",
     "node": "^21.0.0",
     "pnpm": "^8.8.0",
-    "tsc": "^2.0.4"
+    "tsc": "^2.0.4",
+    "typescript": "^5.2.2"
   },
   "config": {
     "commitizen": {
